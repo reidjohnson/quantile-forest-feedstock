@@ -11,27 +11,31 @@ source:
 
 build:
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 0
+  number: 1
 
 requirements:
   build:
-    - {{ compiler('cxx') }}
+    - python                                 # [build_platform != target_platform]
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - cython                                 # [build_platform != target_platform]
+    - numpy >=2.0                            # [build_platform != target_platform]
     - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
     - {{ stdlib('c') }}
   host:
     - python
+    - pip
     - setuptools
     - wheel
     - cython >=3.0a4
-    - numpy >=1.23
-    - scipy >=1.4
+    - numpy >=2.0
     - scikit-learn >=1.0
-    - pip
+    - scipy >=1.4
   run:
     - python
-    - scipy >=1.4
+    - numpy >=1.23
     - scikit-learn >=1.0
-    - {{ pin_compatible('numpy') }}
+    - scipy >=1.4
 
 test:
   imports:
