@@ -1,5 +1,5 @@
 {% set name = "quantile-forest" %}
-{% set version = "1.4.0" %}
+{% set version = "1.4.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/quantile_forest-{{ version }}.tar.gz
-  sha256: 1d0edf8b2f1c4b7d11c940cf1e5740a5381e1d250e5db0feea82d9282c52dab5
+  sha256: 713a23c69562b7551ba4a05c22ce9d0e90db6a73d043e760b29c331cb19dc552
 
 build:
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
@@ -39,7 +39,6 @@ requirements:
 
 test:
   imports:
-    - examples
     - quantile_forest
   commands:
     - pip check
